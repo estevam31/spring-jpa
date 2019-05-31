@@ -1,15 +1,14 @@
 package br.com.michelmilezzi.springjpatarde.repository;
 
-import br.com.michelmilezzi.springjpatarde.domain.MediaSalarial;
+
 import br.com.michelmilezzi.springjpatarde.domain.Setor;
-import org.assertj.core.api.Assertions;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -20,26 +19,13 @@ public class SetorRepositoryTests {
     private SetorRepository setorRepository;
 
     @Test
-    public void findAllTests() {
+    public void setorSemColaboradores(){
+        List<Setor> setores = setorRepository.setoresSemColaboradores();
 
-        List<Setor> setores = setorRepository.findAll();
-
-        for (Setor setor : setores) {
-
-            System.out.println("Setor: " + setor.getNome());
-
+        for (Setor s: setores){
+            System.out.println(s);
         }
 
+        assertThat(setores.size()).isEqualTo(1);
     }
-
-    @Test
-    public void mediaSalarial() {
-
-        MediaSalarial media = setorRepository.calcularMediaSalarial(1);
-        Assertions.assertThat(media.getMediaSalarial()).isGreaterThan(10D);
-
-
-    }
-
-
 }

@@ -7,7 +7,4 @@ import lombok.Getter;
 @Getter
 public class MediaSalarial {
 
-    private Setor setor;
-    private Double mediaSalarial;
-
 }

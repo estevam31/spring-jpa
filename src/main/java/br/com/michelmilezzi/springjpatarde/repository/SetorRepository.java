@@ -7,10 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface SetorRepository extends JpaRepository<Setor, Integer> {
 
-    @Query("SELECT new br.com.michelmilezzi.springjpatarde.domain.MediaSalarial(s, avg(c.salario)) FROM Setor s JOIN s.colaboradores c WHERE s.id = :id GROUP BY s")
-    MediaSalarial calcularMediaSalarial(@Param("id") Integer id);
-
+    @Query("SELECT s FROM Setor s LEFT JOIN s.colaboradores c WHERE c IS NULL")
+    List<Setor> setoresSemColaboradores();
 }
